@@ -1,19 +1,18 @@
 import os.path
+import carga
 
 class Index:
-    opcion="1"
-
+    
+    
     def __init__ (self, opcion):
         self.opcion=opcion
 
-    
-       
-
 def main():
 
+        var=carga.Carga_archivo()
         menu='''Menu Principal:
         1.- Cargar Archivos
-        2.- Procesar Archivo
+        2.- Procesar Terreno
         3.- Escribir Archivo Salida
         4.- Mostrar Datos Del Estudiante
         5.- Mostrar Grafica
@@ -22,18 +21,21 @@ def main():
         while True:
             print(menu)
             op=input("Ingrese una opcion: ")
+
             if op == '1':               
                 rt=input("Ingrese la ruta del archivo: ")
                 ext=os.path.splitext(rt)
                 
-                if ext[1]==".xml":
-                    var=carga.Carga_archivo(rt)
-                    var.cargar()                   
+                if ext[1]==".xml":    
+                    
+                    var.xmlCarga(rt)                   
                 else:
                     print("Archivo incorrecto")
 
             elif op == '2':              
-                print("op2")
+                rt=input("Ingrese nombre del terreno: ")
+                var.xmlGenerarTerreno(rt)
+                
                           
             elif op == '3':
                 rt=input("Ingrese la ruta del archivo de salida: ")
@@ -54,7 +56,7 @@ def main():
                 print(texto)
 
             elif op == '5':
-               print("op5")
+                print("op5")
 
 
                 
