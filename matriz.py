@@ -8,7 +8,7 @@ class nodo:
         self.arriba=None
         self.abajo=None
 
-
+import lista
 class matriz_dato:
     def __init__(self, m, n, nombre):
         
@@ -18,23 +18,28 @@ class matriz_dato:
         
         i=0
         j=0
+        fila=int(fila)
+        columna=int(columna)
         aux_x=self.inicio
         aux_y=self.inicio
-        while i <= fila+1:            
+        while i <= fila:            
             nuevo = nodo(i, 0, 0)
-            aux_x.adelante=nuevo
-            nuevo.atras=aux_x
+            aux_x.atras=nuevo
+            nuevo.adelante=aux_x
             aux_x=nuevo
+            #print(str(i))
             i=i+1
-
-        while j <= columna+1:           
+            
+        #print("-")
+        while j <= columna:           
             nuevo = nodo(0, j, 0)
             aux_y.abajo=nuevo
             nuevo.arriba=aux_y
             aux_y=nuevo
+            #print(str(j))
             j=j+1
 
-        #### rellena
+        #### rellena por columnas
         i=1
         j=1
         
@@ -42,7 +47,7 @@ class matriz_dato:
         aux_y=self.inicio.abajo
         temp=aux_y         
         while i<= fila:            
-            while j<= columna+1:
+            while j<= columna:
                 nuevo = nodo(i, j, 0)
                 aux_x=self.recorridoY(aux_x)              
                 aux_y.atras=nuevo
@@ -53,15 +58,22 @@ class matriz_dato:
                 
                 aux_y=nuevo
                 aux_x=aux_x.atras
-                
+                #print(str(i)+'-'+str(j))
                 j=j+1
-            #while fin j
+            #while fin 
+            #print('****')
             temp=temp.abajo
             aux_y=temp
             aux_x=self.inicio.atras
             i=i+1
             j=1
 
+
+       
+
+            
+
+        
     def recorridoY(self, nodo):
         regreso=nodo        
         while regreso.abajo != None:
@@ -79,15 +91,14 @@ class matriz_dato:
         aux=temporal.atras
 
         while temporal.abajo != None:
-            while aux.atras != None:
-                print(aux.x)
-                print(aux.y)
-                print(aux.dato)
-                print(aux.binario)
-
+            while aux != None:
+                print(str(aux.x)+'-'+str(aux.y)+'/'+str(aux.dato))
+                
                 aux=aux.atras
             temporal=temporal.abajo
             aux=temporal.atras
+
+            
 
     def reemplazo(self, i, j, dato):       
         temporal=self.inicio.abajo
@@ -95,7 +106,7 @@ class matriz_dato:
 
         while temporal.abajo != None:
             
-            while aux.atras != None:
+            while aux != None:
                 
                 if i == str(aux.x) and j == str(aux.y):
                     aux.dato=dato 
@@ -108,4 +119,74 @@ class matriz_dato:
             aux=temporal.atras
             if aux ==None:
                 break
+
+    def crearGrafica(self):
+        texto='''   graph g{ \n
+       layout=dot \n
+       label="grid" \n
+       labelloc = "t" \n
+       node [shape=circle]\n  ''' 
+
+        temporal=self.inicio.abajo
+        aux=temporal.atras
+        nombre=self.inicio.dato
+
+        while temporal.abajo != None:#primer linea crea variables
+            while aux != None:
+                texto=texto +'N'+str(aux.x) + str(aux.y) + ';'+ '\n'
+                texto=texto +'N'+ str(aux.x) + str(aux.y)+'[label="'+str(aux.dato)+'"];'+ '\n'
+                
+                aux=aux.atras
+            temporal=temporal.abajo
+            aux=temporal.atras
+
+        temporal=self.inicio.abajo
+        aux=temporal.atras
+
+        #crea el primer bloque
+        while temporal.abajo != None:
+            while aux != None:
+                texto=texto +'N'+ str(aux.x) + str(aux.y)
+                if(aux.atras != None):
+                    texto=texto+'--'
+                else:
+                    texto=texto+'\n'
+                    
+                
+                aux=aux.atras
+            temporal=temporal.abajo
+            aux=temporal.atras
+
+        #crea el segundo bloque
+        temporal=self.inicio.abajo
+        aux=temporal.atras
+
+        while temporal.atras != None:
+            texto=texto+'rank=same {'
+            while aux != None:
+                texto=texto +'N'+ str(aux.x) + str(aux.y)
+                if(aux.abajo != None):
+                    texto=texto+'--'
+                else:
+                    texto=texto+ '} \n'
+                
+                aux=aux.abajo
+            
+            temporal=temporal.atras
+            aux=temporal.atras
+        
+        texto=texto+'}'
+
+        #print(texto)
+        self.var=lista.matriz_dato("nombre","texto","recorrido")
+        self.var.crear(nombre ,texto, "recorrido")
+        #self.var.revisar()
+
+    def llamarReporte(self, nombre):
+        self.var.buscarGraf(nombre)
+
+
+        
+
+
     

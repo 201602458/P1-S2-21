@@ -1,5 +1,6 @@
 import os.path
 import carga
+#import practica
 
 class Index:
     
@@ -9,6 +10,7 @@ class Index:
 
 def main():
 
+        #var=carga.Carga_archivo()
         var=carga.Carga_archivo()
         menu='''Menu Principal:
         1.- Cargar Archivos
@@ -56,7 +58,8 @@ def main():
                 print(texto)
 
             elif op == '5':
-                print("op5")
+                rt=input("Ingrese nombre del terreno: ")
+                var.generarGrafica(rt)
 
 
                 
