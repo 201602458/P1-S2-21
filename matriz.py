@@ -7,6 +7,10 @@ class nodo:
         self.atras=None
         self.arriba=None
         self.abajo=None
+        
+
+
+
 
 import lista
 class matriz_dato:
@@ -92,7 +96,7 @@ class matriz_dato:
 
         while temporal.abajo != None:
             while aux != None:
-                print(str(aux.x)+'-'+str(aux.y)+'/'+str(aux.dato))
+                #print(str(aux.x)+'-'+str(aux.y)+'/'+str(aux.dato))
                 
                 aux=aux.atras
             temporal=temporal.abajo
@@ -184,6 +188,32 @@ class matriz_dato:
 
     def llamarReporte(self, nombre):
         self.var.buscarGraf(nombre)
+
+    #COSA IMPORTANTE QUE NO SE COMO HACER
+
+    def calculo(self, xi, yi, xf, yf):
+        #print(xi)
+        #print(yi)
+        #print(xf)
+        #print(yf)
+
+        temporal=self.inicio.abajo
+        aux=temporal.atras
+        carrito=self.inicio
+        meta=self.inicio
+
+        while temporal.abajo != None:#recorrido de pos inicio y final
+            while aux != None:
+                #print(str(aux.x)+'-'+str(aux.y)+'/'+str(aux.dato))
+                if(str(aux.x)==str(xi) and str(aux.y)==str(yi)):
+                    carrito=aux
+                if(str(aux.x)==str(xf) and str(aux.y)==str(yf)):
+                    meta=aux
+                aux=aux.atras
+            temporal=temporal.abajo
+            aux=temporal.atras
+
+
 
 
         

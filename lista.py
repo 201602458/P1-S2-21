@@ -46,8 +46,8 @@ class matriz_dato:
     def buscarGraf(self, nombre):
 
         aux=self.inicio.siguiente
-        print(aux.nombre)
-        print(nombre)
+        #print(aux.nombre)
+        #print(nombre)
 
         while aux != self.inicio:
 

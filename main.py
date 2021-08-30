@@ -44,13 +44,13 @@ def main():
                 ext=os.path.splitext(rt)
 
                 if ext[1]==".xml":
-                    var2.salida(rt)                  
+                    var.salida(rt)                  
                 else:
                     print("Ruta de Archivo Incorrecto")
 
             elif op == '4':
                 texto='''
-                Maria Luisa Fernanda calderon Molina
+                Maria Luisa Fernanda Calderon Molina
                 201602458
                 Introduccion a la Programacion y Computacion 2
                 Seccion "A"
